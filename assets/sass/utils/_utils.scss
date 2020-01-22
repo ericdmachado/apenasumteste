@@ -1,0 +1,65 @@
+@mixin calc($propert, $expression)
+{
+	#{$propert}: -webkit-calc(#{$expression});  	/* para Chrome */
+	#{$propert}: -khtml-calc(#{$expression});   	/* para KDE */
+	#{$propert}: -moz-calc(#{$expression});     	/* para Firefox */
+	#{$propert}: -ms-calc(#{$expression});  		/* para Microsoft */
+	#{$propert}: -o-calc(#{$expression});  			/* para Opera */
+	#{$propert}: calc(#{$expression});          	/* para suporte nativo */
+}
+
+
+
+@mixin absolute($top:false,$left:false,$bottom:false,$right:false)
+{
+	position: absolute;
+
+	@if($top)
+	{
+		top: #{$top};
+	}
+	@if($left)
+	{
+		left: #{$left};
+	}
+	@if($bottom)
+	{
+		bottom: #{$bottom};
+	}
+	@if($right)
+	{
+		right: #{$right};
+	}
+}
+
+@mixin fixed($top:false,$left:false,$bottom:false,$right:false)
+{
+	@include absolute($top,$left,$bottom,$right);
+	position: fixed;
+}
+
+@mixin relative($top:false,$left:false,$bottom:false,$right:false)
+{
+	@include absolute($top,$left,$bottom,$right);
+	position: relative;
+}
+
+
+@mixin text-border($top:1px, $right:false, $bottom:false, $left:false, $color:#000)
+{
+	@if $right == 'auto'
+	{
+		$right: $top;
+	}
+	@if $bottom == 'auto'
+	{
+		$bottom: $top;
+	}
+	@if $left == 'auto'
+	{
+		$left: $top;
+	}
+
+
+	@include text-shadow(-#{$left} -#{$top} 0px #{$color}, #{$right} -#{$top} 0px #{$color}, #{$bottom} #{$right} 0px #{$color}, -#{$left} #{$bottom} 0px #{$color});
+}

@@ -1,0 +1,638 @@
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	- IMPORTS
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
+@import "compass/reset";
+@import "bourbon/bourbon";
+@import "compass";
+@import "compass/typography/text/ellipsis";
+
+@import "utils/fontface";
+@import "utils/utils";
+@import "utils/media-queries";
+@import "utils/grids";
+
+@import "chat/default";
+@import "chat/icons";
+@import "chat/buttons";
+@import "chat/layer";
+@import "neat/neat";
+
+
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	- DEFAULT
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
+html, body
+{
+	height: 100%;
+	font-family: arial;
+	font-size: 12px;
+	background: #FFF;
+	overflow: hidden;
+	background: #000;
+}
+*
+{
+	cursor: default !important;
+	font-family: arial;
+	@include box-sizing(border-box);
+}
+a, a *
+{
+	cursor: pointer !important;
+}
+img
+{
+	display: block;
+}
+
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	- GAME - ASTEDROID
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
+div[data-clone-id="the-responsive-game"]
+{
+	max-width: 800px;
+	float: left;
+	width: 100%;
+	height: auto;
+	display: block;
+	position: absolute;
+	left: -200%;
+	top: -200%;
+
+	img
+	{
+		float: left;
+		width: 100%;
+		height: auto;
+	}
+}
+
+#fire-evt
+{
+	position: absolute;
+	z-index: 4;
+	background: #FF9900;
+	@include size(60px);
+	@include border-radius(60px);
+
+	right: 0;
+    bottom: 0;
+}
+
+canvas#the-responsive-game
+{
+	z-index: 4;
+}
+
+canvas
+{
+	background: transparent;
+	display: block;
+	position: relative;
+	left: 0;
+	top: 0;
+}
+
+#starMinCanvas, #starMaxCanvas
+{
+	position: absolute;
+	left: -1000px;
+	top: -1000px;
+
+	//background-color: #ff9900;
+	z-index: 1;
+}
+
+#starMaxCanvas
+{
+	//background-color: rgba(255,0,0,0.5);
+	z-index: 2;
+}
+
+#developer
+{
+	width: 100%;
+	height: 100px;
+	background-color: #FFF;
+	font-size: 12px;
+	line-height: normal;
+	overflow-x: hidden;
+	overflow-y: auto;
+	position: absolute;
+	z-index: 30;
+	width: 300px;
+	top: 0;
+	left: 50%;
+	border: 1px solid #ccc;
+	margin-left: -150px;
+	display: none;
+
+	p{
+		margin: 0;
+		padding: 0;
+		border: 0;
+
+	}
+}
+
+.ui-page-home, .ui-page-home *
+{
+	@include box-sizing(border-box);
+	-webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
+    /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+    -webkit-tap-highlight-color: rgba(0,0,0,0); 
+    -webkit-user-select: none; /* prevent copy paste, to allow, change 'none' to 'text' */
+    -webkit-tap-highlight-color: rgba(0,0,0,0); 
+    -ms-touch-action: none;
+    touch-action: none;
+}
+
+.ui-page-home
+{
+	//background-color: #0d2234;
+	background-color: #0d2234;
+}
+
+#joystick
+{
+	position: absolute !important;
+	left: 0;
+	top: 0;
+	@include size(200px);
+	z-index: 10;
+}
+
+#spaceship
+{
+	@include transition(all 600ms ease 1000ms);
+	@include transform(translateX(-150%) translateY(0px));
+	top: 50%;
+	margin-top: -20px;
+	display: block; 
+	position: absolute;
+	visibility: hidden;
+	z-index: 3;
+
+	&.actived
+	{
+		@include transform(translateX(130px) translateY(0px));
+		visibility: visible;
+
+		&[data-status="actived"]
+		{
+			@include transition(none 0ms ease 0ms);
+			top: 0%;
+			margin-top: 0;
+		}
+	}
+}
+
+#game-score
+{
+	font-family: 'GoodDog', Arial;
+	position: absolute;
+	right: 0;
+	top: 0;
+	text-align: right;
+	color: #FFF;
+	font-size: 45px;
+	z-index: 5;
+	padding-right: 8px;
+	line-height: 30px;
+	display: none;
+
+	&:before
+	{
+		position: relative;
+		display: inline-block;
+		content: '';
+		@include size(26px);
+		background-image: image-url('gameui/bkg-asteroid-score.png');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+		margin-right: 8px;
+	    top: 1px;
+	    z-index: 6;
+	}
+
+	.add
+	{
+		@extend #game-score;
+		@include transition(all 0ms ease);
+		@include opacity(1);
+		display: block;
+		position: absolute;
+		right: 0;
+		content: '';
+		font-size: 30px;
+		top: 28px;
+		margin-top: 0px;
+	
+
+		
+		&.more
+		{
+			@include transition(all 400ms ease);
+			@include opacity(0);
+			margin-top: -28px;
+		}
+
+
+		&:before
+		{
+			display: none;
+		}
+	}
+}
+
+.game-life
+{
+	background: transparent;
+    left: 0px;
+    position: absolute;
+    top: 10px;
+    z-index: 5;
+    display: none;
+
+    .bar-ship-energy
+    {
+    	@include border-radius(5px);
+    	@include box-shadow(-4px 4px 0px 0px rgb(220, 140, 0));
+    	background-color: #b68d45;
+    	border: 3px solid #e8c07a;
+    	width: 100px;
+    	height: 20px;
+    	float: left;
+    	display: none;
+
+    	span
+    	{
+    		@include border-radius(3px);
+    		background-image: image-url('gameui/bkg-ship-energy.png');
+    		float: left;
+    		display: inline-block;
+    		width: 50%;
+    		height: 100%;
+    		background-color: #f7292e;
+    	}
+    }
+}
+
+
+
+#stats
+{
+	cursor: pointer;
+    opacity: 0.9;
+    width: 80px;
+    position: absolute;
+    z-index: 10;
+    left: 5px;
+    top: 40px;
+}
+
+
+#asteroid
+{
+	position: absolute;
+    left: -200%;
+    top: -200%;
+    z-index: 1;
+}
+
+
+.lifes
+{
+	display: inline-block;
+	float: left;
+	margin-left: 12px; 
+
+	.ui-icon
+	{
+		@include transition(all 400ms easeOutBounce);
+		@include size(17px);
+		display: inline-block;
+		color: #FFF;
+		position: relative;
+		font-size: 25px;
+
+		&:before
+		{
+			@include text-shadow(0px -2px 1px rgba(0,0,0,0.5));
+		}
+
+
+		&.new
+		{
+
+			color: green;
+		}
+	}
+}
+
+
+
+
+.ui-layer
+{
+	background-color: rgba(13,34,52,0.8);
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 20;
+	display: none;
+
+	.wrapper
+	{
+		@include box-sizing(border-box);
+		@include border-radius(10px);
+		width: 300px;
+	    background: rgba(0,0,0,0.2);
+	    display: inline-block;
+	    margin-left: -150px;
+	    position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    padding-top: 18px;
+
+		h2
+		{
+			@include transform(translate(0px, 0px) rotate(-3deg));
+			@include text-border(2px, 2px, 2px, 2px);
+			font-family: 'GoodDog', Arial;
+			color: #dc8c00;
+		    float: left;
+		    font-size: 70px;
+		    //margin-left: -100px;
+		    text-align: center;
+		    width: 100%;
+
+		    position: absolute;
+		    top: -45px;
+		}
+
+		span
+	    {
+	    	font-family: 'GoodDog', Arial;
+	    	color: #fff;
+	    	text-align: center;
+	    	display: block;
+	    	width: 100%;
+	    	font-size: 28px;
+	    }
+
+		div
+		{
+			display: block;
+		    float: left;
+		    padding: 20px;
+		    width: 100%;
+
+		    .ui-btn
+		    {
+				width: 124px;
+		    }
+		}
+	}
+
+	&#init
+	{
+		display: none;
+
+		.wrapper
+		{
+			h2
+			{
+				@include transform(translate(0px, 0px) rotate(-3deg));
+				
+				span
+				{
+					color: #dc8c00;
+					display: block;
+				    font-size: 70%;
+				    left: -22px;
+				    margin: 0;
+				    padding: 0;
+				    position: absolute;
+				    top: -30px;
+				}
+			}
+		}
+	}
+}
+
+
+
+#highscore
+{
+	@include transition(all 350ms ease);
+	@include box-sizing(border-box);
+	@include translateY(100%);
+	@include size(100%);
+	position: fixed;
+	display: block;
+	top: 100%;
+	bottom: 0;
+	z-index: 30;
+	left: 0;
+	background-color: #FFF;
+	padding-top: 50px;
+
+	&.show
+	{
+		@include transform(translateY(0%));
+		display: block;
+		top: 0%;
+	}
+
+	h3
+	{
+		@include box-shadow(0px 2px 0px 0px rgba(0,0,0,0.05));
+		font-family: 'GoodDog', Arial;
+		border-bottom: 1px solid #DDD;
+		display: block;
+		padding: 5px;
+		width: 100%;
+		position: absolute;
+		height: 50px;
+		font-size: 22px;
+		text-align: center;
+		line-height: 40px;
+		top: 0;
+		left: 0;
+
+		.ui-btn-close
+		{
+			@include box-sizing(border-box);
+			@include size(35px);
+			position: absolute;
+			right: 5px;
+			margin: 2px;
+			
+
+			&.ui-btn-danger
+			{
+				border: 1px solid $base-color-danger !important;
+			}
+		}
+	}
+
+	.ui-wrapper-top-10
+	{
+		display: block;
+		width: 100%;
+		height: 100%;
+		overflow-y: auto;
+		overflow-x: hidden;
+		position: relative;
+
+		.top10
+		{
+			width: 100%;
+			height: 100%;
+			display: block;
+
+			li
+			{
+				width: 100%;
+				border-bottom: 1px solid #EEE;
+				display: block;
+
+				&:first-child
+				{
+					height: 101%;
+					background-color: #0d2234;
+
+
+					span.score-user-picture
+					{
+						@include size(120px);
+						@include border-radius(6px);
+						background-color: rgb(204, 204, 204);
+					    border-radius: 6px;
+					    display: block;
+					    height: 120px;
+					    margin-top: -65px;
+					    position: absolute;
+					    right: 20px;
+					    top: 50%;
+					}
+
+					span.score-counter
+					{
+						font-family: 'GoodDog',Arial;
+					    font-size: 100px;
+					    left: 20px;
+					    margin-top: -60px;
+					    position: absolute;
+					    top: 50%;
+					    color: #FFF;
+
+						i
+						{ 
+							font-size: 55px;
+						    left: 4px;
+						    position: relative;
+						    top: 0;
+						    color: #FFF;
+
+						    &:after
+						    {
+						    	color: #FFF;
+						    	content: "lugar";
+							    left: 16px;
+							    position: relative;
+							    top: -6px;
+						    }
+						}
+					}
+
+					span.score-val
+					{
+						color: rgb(255, 255, 255);
+					    font-size: 12px;
+					    margin-top: 50px;
+					    position: absolute;
+					    right: 20px;
+					    text-align: center;
+					    top: 50%;
+					    width: 120px;
+					}
+
+					span.score-name
+					{
+						font-family: 'GoodDog',Arial;
+					    font-size: 50px;
+					    left: 20px;
+					    margin-top: -4px;
+					    position: absolute;
+					    top: 50%;
+					    color: #FFF;
+					}
+				}
+
+				span
+				{
+					@include box-sizing(border-box);
+					display: inline-block;
+					width: 50%;
+					padding: 5px 8px;
+					line-height: 30px;
+					
+
+					&.score-name
+					{
+						text-align: left;
+						width: 50%;
+					}
+					
+					&.score-counter
+					{
+						width: 8%;
+						color: #BBB;
+
+						i
+						{ 
+							font-size: 12px;
+							position: relative;
+							top: 2px;
+						}
+					}
+
+					&.score-val
+					{
+						text-align: right;
+						width: 42%;
+						font-size: 12px;
+					}
+
+					&.score-user-picture
+					{
+						display: none;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

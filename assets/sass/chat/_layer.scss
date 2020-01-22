@@ -1,0 +1,859 @@
+.ui-app-layer
+{
+	background: rgba(0,0,0,0.35);
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 30;
+	@include translateY(-200%);
+
+	&.show { @include translateY(0%); }
+
+	&.hide { @include translateY(-200%); }
+
+	.ui-app-msg-container
+	{
+		@include box-shadow(0px 1px 1px 0px rgba(0, 0, 0, 0.1), 0px 2px 5px 0px rgba(0, 0, 0, 0.1));
+		@include box-sizing(border-box);
+		@include user-select(none);
+		
+		@if($radius-active == true)
+		{
+			@include border-radius(6px);
+		}
+
+		width: auto;
+		background: #FFF;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		min-width: 200px;
+
+		h3
+		{
+			@include box-sizing(border-box);
+			line-height: 40px;
+			border-bottom: 0px solid #bbb;
+			font-size: 14px;
+			background-color: $base-color-blue-default;
+			color: #FFF;
+			font-weight: bolder;
+
+			&.align-left { text-indent: 10px; }
+
+			.ui-btn-danger
+			{
+				@include size(40px);
+				border: 0 none;
+				padding: 0 8px;
+			    position: absolute;
+			    right: 0px;
+			    top: 0px;
+			    margin: 0;
+			    background-color: transparent;
+
+			    i.ui-app-icon
+			    {
+			    	font-size: 18px;
+				    height: 100%;
+				    line-height: 40px;
+				    position: static !important;
+				    width: 100%;
+			    }
+
+			    &:hover, &:active, &:focus
+			    {
+			    	background-color: $base-color-danger;
+			    }
+			}
+		}
+		dl
+		{
+			@include box-sizing(border-box);
+
+			dt
+			{
+				line-height: 20px;
+				font-size: 13px;
+				padding: 20px 30px;
+			}
+
+			dd
+			{
+				margin-top: 10px;
+				padding: 10px 0;
+				border-top: 1px solid #DDD;
+				background: #EEE;
+				
+				@if $radius-active == true
+				{
+					@include border-radius(0 0 6px 6px);
+				}
+
+				a { min-width: 100px; }
+			}
+		}
+	}
+
+	.ui-app-result
+	{
+		font-size: 11px;
+
+
+		&.no-result
+		{
+			background-color: $base-color-info;
+		    color: #FFFFFF;
+		    font-size: 12px;
+		    line-height: 30px;
+		    padding: 0 10px 0 8px !important;
+
+		    .ui-app-icon
+		    {
+		    	font-size: 18px;
+			    margin-right: 6px;
+		    }
+		}
+	}
+}
+
+
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	- HOTSPOT SELECT
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
+.ui-app-layer-hotspot-select
+{
+	@include box-sizing(border-box);
+
+	p
+	{
+		@include box-sizing(border-box);
+		margin-bottom: 15px;
+	}
+	
+	div[data-hotspot-filter="list"]
+	{
+		height: 250px;
+
+		
+		.ui-app-hotspot-filter
+		{
+			@include box-sizing(border-box);
+			border: 1px solid #ccc;
+			height: 100%;
+			overflow-y: auto;
+			overflow-x: hidden;
+
+			&.all-hotspot { border-color: lighten($base-color-danger, 30%); }
+			&.selected-hotspot { border-color: lighten($base-color-info, 25%); }
+
+			li
+			{
+				@include box-sizing(border-box);
+				border-bottom: 1px solid #eee;
+				margin: 7px 8px !important;
+				padding: 5px 10px;
+
+				&, & * { cursor: pointer !important; }
+
+				&:last-child { border: 0 none; }
+
+				&:hover
+				{
+					background: $base-color-info;
+					color: #FFF;
+				}
+				&.selected
+				{
+					background: $base-color-primary;
+					color: #FFF;
+				}
+			}
+		}
+
+		div[data-hotspot-toolbar="true"]
+		{
+			@include box-sizing(border-box);
+			padding: 50px 0 0 30px;
+
+			.ui-btn { margin-bottom: 5px; }
+		}
+	}
+}
+
+
+
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	- UPLOAD FILE
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
+.ui-app-layer-upload-file
+{
+	.ui-btn-info
+	{
+		padding: 0 30px;
+	}
+	.ui-app-upload-text
+	{
+		font-size: 12px;
+		color: #333;
+		margin-top: 15px;
+	}
+
+	.ui-app-upload-info
+	{
+		font-size: 11px;
+		color: #929292;
+		margin-top: 3px;
+		line-height: 14px;
+
+		span
+		{
+			display: inline !important;
+			font-weight: bold;
+		}
+	}
+}
+
+
+
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	- ENQUETE EDIT
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
+.ui-app-layer-enquete-edit
+{
+	.ui-app-row-options
+	{
+		li
+		{
+			margin-bottom: 5px;
+			position: relative;
+
+			label
+			{
+				input
+				{
+					width: 100%;
+					margin: 0;
+				}
+			}
+
+			.ui-btn.ui-app-span-1
+			{
+				@include size(37px);
+				position: absolute;
+				margin-left: -2px;
+				right: 0;
+				z-index: 2;
+				display: none;
+
+
+				.ui-app-icon
+				{
+					line-height: 20px;
+				}
+			}
+		}
+	}
+}
+
+
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	- ENQUETE PARTIAL
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
+.ui-app-layer-enquete-parcial
+{
+	#info-text
+	{
+		padding-bottom: 0;
+		
+		dl
+		{
+			dt
+			{
+				text-align: left;
+				padding: 0;
+				font-weight: bold;
+				font-size: 11px;
+				line-height: 12px;
+			}
+			dd
+			{
+				background-color: transparent;
+			    border: 0 none;
+			    font-size: 14px;
+			    line-height: 35px;
+			    margin: 0;
+			    padding: 0;
+			    text-align: left;
+			}
+		}
+
+		#enquete-partial
+		{
+			padding: 0;
+		}
+	}
+}
+
+
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	- VOUCHER - PARTIAL
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
+.ui-app-layer-voucher-partial
+{
+	#info-text
+	{
+		padding-bottom: 0;
+		
+		dl
+		{
+			dt
+			{
+				text-align: left;
+				padding: 0;
+				font-weight: bold;
+				font-size: 11px;
+				line-height: 12px;
+			}
+			dd
+			{
+				background-color: transparent;
+			    border: 0 none;
+			    font-size: 14px;
+			    line-height: 35px;
+			    margin: 0;
+			    padding: 0;
+			    text-align: left;
+			}
+		}
+	}
+
+
+	.ui-app-search-filter
+	{
+		@include box-sizing(border-box);
+		display: block;
+		position: relative;
+		top: 1px;
+		margin-top: 15px;
+		position: relative;
+
+
+		&:after
+		{
+			@extend .ui-app-icon;
+			@extend .ligature-icons;
+			color: #CCC;
+			font-size: 24px;
+		    line-height: 36px;
+		    position: absolute;
+		    right: 8px;
+		    top: 0;
+			content: '\E116';
+			z-index: 2;
+		}
+
+		input
+		{
+			background: lighten($base-color-info, 35%);
+		}
+		button
+		{
+			@include box-sizing(border-box);
+			@include border-radius(0px);
+			@include size(37px);
+			padding: 0;
+			position: absolute;
+			right: 0;
+			top: 0;
+			overflow: hidden;
+			margin: 0;
+			text-indent: -1000px;
+			overflow: hidden;
+			display: none;
+			z-index: 3;
+
+			&:after
+			{
+				@extend .ui-app-icon;
+				content: '\e014';
+				background: transparent;
+			    color: #FFF;
+			    display: block;
+			    font-size: 20px;
+			    height: 20px;
+			    position: relative;
+			    right: -8px;
+			    text-align: center;
+			    text-indent: 0;
+			    top: -24px;
+			    width: 20px;
+			    z-index: 4;
+			}
+
+			&:hover
+			{
+				@extend .ui-btn-danger;
+			}
+		}
+	}
+
+	#voucher-partial
+	{
+		margin: 20px 0 20px 0;
+		padding: 0;
+
+		th,td
+		{
+			font-size: 11px;
+		}
+		td
+		{
+			height: 34px;
+		}
+
+
+	}
+}
+
+
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	- PREVIEW - 
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
+.ui-app-layer-background-preview
+{
+	#info-text
+	{
+		padding: 20px;
+		//background-image: image-url('ui/ui-app-bkg-preload.gif');
+		background-position: center center;
+		background-repeat: no-repeat;
+	}
+}
+
+
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	- VOUCHER - 
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
+.ui-app-layer-voucher-edit,
+.ui-app-layer-voucher-create
+{
+	.ui-btn-image-preview
+	{
+		margin: 0 !important;
+
+		figure
+		{
+			@include size(83px);
+			margin: 0 !important;
+		}
+	}
+	#change_image
+	{
+		margin: 5px 0 0 0;
+		position: relative;
+		top: 0px;
+		width: 85px;
+	}
+
+	#new_image
+	{
+		@include size(83px);
+		margin: 0;
+	}
+
+	#rules
+	{
+		min-height: 83px;
+	}
+}
+
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	- CARDAPIO - 
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
+.ui-app-layer-cardapio-categoria-edit,
+.ui-app-layer-cardapio-categoria-create
+{
+	#image_upload,
+	#image_preview
+	{
+		display: none;
+
+		&.show
+		{
+			display: inline-block;
+		}
+	}
+}
+
+
+.ui-app-layer-cardapio-one-product-edit,
+.ui-app-layer-cardapio-one-product-create
+{
+	#info-text
+	{
+		overflow-y: hidden;
+		position: relative;
+		height: 230px;
+
+		#form-edit,
+		#form-create
+		{
+			@include transition(transform 600ms ease);
+
+			&.move-up
+			{
+				@include translateY(-140%);
+			}
+		}
+
+		#form-upload-image
+		{
+			@include transition(transform 600ms ease, margin 600ms ease);
+			margin-top: 20px;
+
+			&.move-up
+			{
+				@include translateY(-100%);
+				margin-top: 18px;
+			}
+		}
+
+		.ui-app-upload-info
+		{
+			font-size: 10px;
+
+			span
+			{
+				display: inline;
+				font-weight: bold;
+				font-size: 9px;
+				color: #777;
+			}
+		}
+	}
+
+	&.upload-file
+	{
+		#info-text
+		{
+			height: 255px;
+		}
+	}
+}
+
+
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	- CARDAPIO - PREVIEW
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
+.ui-app-layer-cardapio-preview
+{
+	#ui-app-msg
+	{
+		overflow: hidden;
+		width: 340px;
+	}
+	#info-text
+	{
+		width: 340px;
+		padding: 0;
+
+
+		iframe
+		{
+			@include scale(1);
+			overflow-x: hidden;
+			overflow-y: auto;
+			height: 580px;
+		    width: 340px;
+		    display: block;
+		}
+	}
+	#info-buttons
+	{
+		margin-top: 0;
+	}
+}
+
+
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	- CARDAPIO - CONFIG
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
+.ui-app-layer-cardapio-config
+{
+	@include box-sizing(border-box);
+
+	#info-buttons
+	{
+		margin-top: 0;
+	}
+
+	nav
+	{
+		@include box-sizing(border-box);
+		border-right: 1px solid #e2e3de;
+		background: #f3f3f8;
+		min-height: 200px;
+		width: 129px;
+
+		.ui-btn
+		{
+			@include box-sizing(border-box);
+			margin: 0;
+			padding: 0;
+			height: 40px;
+			display: inline-block;
+			line-height: 40px;
+			border-bottom: 1px solid #e2e3de;
+			border-right: 1px solid #e2e3de;
+			color: #b9b9b9;
+			width: 131px;
+
+			&.actived,
+			&:hover
+			{
+				@include box-sizing(border-box);
+				border-right: 1px solid #FFF;
+				background-color: #FFF;
+				color: $base-color-blue-default;
+				width: 132px;
+			}
+
+			&:last-child
+			{
+				border-bottom: 0px none;
+			}
+		}
+	}
+
+	ul
+	{
+		li
+		{
+			padding: 8px 0 0 0;
+			display: none;
+
+			&:first-child
+			{
+				display: block;
+			}
+
+			h4
+			{
+				font-size: 16px; 
+				margin-bottom: 5px;
+			}
+			span
+			{
+				font-size: 11px;
+			}
+		}
+	}
+}
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	- CARDAPIO - PRODUCT NEW AND EDIT
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
+.ui-app-layer-cardapio-product-edit,
+.ui-app-layer-cardapio-one-product-edit
+{
+	textarea
+	{
+		//height: 70px !important;
+		//min-height: 70px !important;
+	}
+
+	li
+	{
+		&:last-child
+		{
+			margin-top: 6px;
+		}
+
+		&[data-content-id="list-image"]
+		{
+			@include box-sizing(border-box);
+			background: transparent;
+			margin: 6px 0px;
+
+
+			.ui-app-images-container
+			{
+				@include box-sizing(border-box);
+				position: relative;
+				border: 1px solid #ccc;
+				height: 120px;
+				overflow: hidden;
+
+
+				.ui-app-image-content-wrapper
+				{
+					@include box-sizing(border-box);
+					background-color: #eef2fb;
+					top: 0;
+					left: 0;
+					position: absolute;
+					z-index: 8;
+					width: 496px;
+					height: 118px;
+					overflow-x: scroll;
+					overflow-y: hidden;
+
+
+					ul
+					{
+						float: left;
+						width: 700px;
+						height: 118px;
+
+						li
+						{
+							@include transition(all 150ms ease);
+							@include size(60px);
+							float: left;
+							height: 100%;
+							width: 70px;
+							margin-top: 0;
+
+
+							.ui-btn-image-preview
+							{
+								@include transition(all 150ms ease 50ms);
+								position: relative;
+								margin: 10px 5px 0 5px !important;
+								@include translateY(12px);
+								z-index: 3;
+								border: 0 none !important;
+							}
+
+							.ui-btn.ui-btn-danger.mini
+							{
+								@include transition(all 150ms ease 50ms);
+								@include translateY(-20px);
+								margin: 0 0 0 5px !important;
+							    position: relative;
+							    top: 0px;
+							    width: 60px;
+							    z-index: 1;
+							}
+
+
+							&:hover
+							{
+								.ui-btn-image-preview
+								{
+									@include box-shadow(0px 4px 6px -1px rgba(0, 0, 0, 0.4));
+									@include translateY(2px);
+									border: 0 none !important;
+								}
+
+								.ui-btn.ui-btn-danger.mini
+								{
+									@include translateY(2px);
+								}
+							}
+						}
+					}
+				}
+
+
+				.ui-app-image-tools-wrapper
+				{
+					@include box-shadow(-1px 0px 1px 0px rgba(0, 0, 0, 0.05));
+					@include box-sizing(border-box);
+					position: absolute;
+					right: 0;
+					top: 0;
+					height: 118px;
+					width: 82px;
+					border-left: 1px solid #ccc;
+					background-color: #FFF;
+					z-index: 10;
+
+
+					.ui-btn[data-action="upload"]
+					{
+						@include box-sizing(border-box);
+						width: 68px;
+						height: 68px;
+						margin: 19px 7px 0 7px;
+					}
+				}
+			}
+		}
+	}
+}
+
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	- CARDAPIO - PRODUCT NEW AND EDIT
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
+.ui-app-layer-cardapio-one-product-edit
+{
+	ul
+	{
+		li
+		{
+			.ui-btn-image-preview
+			{
+				@include box-sizing(border-box);
+				@include size(80px);
+				margin: 0 !important;
+
+				& figure
+				{
+					@include box-sizing(border-box);
+					width: 100%;
+					height: 100%;
+				}
+			}
+
+			#rules
+			{
+				height: 77px !important;
+			}
+
+			#change_image
+			{
+				width: 76px;
+			}
+		}
+	}
+}
+
+
+
+
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	- FAVORITOS - 
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
+.ui-app-layer-favoritos-config
+{
+	.ui-app-input-add-wrapper
+	{
+		position: relative;
+
+		#favorito_mail
+		{
+			padding: 10px 98px 10px 10px;
+		}
+
+		.ui-btn-success
+		{
+			position: absolute;
+			height: 37px;
+			right: 0;
+			top: 0;
+		}
+	}
+
+	#voucher-partial
+	{
+		padding: 0 !important;
+	}
+}
+
+
+
+
+
