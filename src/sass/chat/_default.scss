@@ -1,0 +1,533 @@
+@mixin sprt($x:0px, $y:0px)
+{
+	//background-image: image-url('ui/ui-app-sprite.png');
+	background-position: #{$x} #{$y};
+	background-repeat: no-repeat;
+}
+
+
+
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	- COLORS
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
+//ELLIPSIS
+$use-mozilla-ellipsis-binding: true;
+
+//COLORS
+$base-color-default: 	#ffffff;
+$base-color-primary: 	#428bca;
+$base-color-success: 	#5cb85c;
+$base-color-info: 		#5bc0de;
+$base-color-warning: 	#f0ad4e;
+$base-color-danger: 	#d9534f;
+$base-color-link: 		#428bca;
+
+//RADIUS
+$radius-active: 		true;
+
+//NEUTRAL COLOR BLUE
+$base-color-blue-default: #1d8fc5;
+
+//DARK COLOR BLUE
+$base-color-blue-dark: 	#2a4258;
+
+//LIGHT COLOR BLUE
+$base-color-blue-light: #e1eaf7;
+
+//EXTRA LIGHT COLOR BLUE
+$base-color-blue-extra-light: #d4dfdf;
+
+//GREEN BLUE COLOR
+$base-color-green-blue: #59A8C2;
+
+
+//CARDAPIO
+$category-base-color: lighten(#000, 100%);
+$category-base-color-actived: lighten($base-color-success, 30%);
+$category-base-color-hover: lighten($base-color-info, 25%);
+
+//APPLICATION MENU SIZE
+$menu-size: 60px;
+
+//PROFILE MENU WIDTH
+$profile-width: 230px;
+
+
+/*
+$base-color-default: 	$base-color-info;
+$base-color-primary: 	$base-color-info;
+$base-color-success: 	$base-color-info;
+$base-color-info: 		$base-color-info;
+$base-color-warning: 	$base-color-info;
+$base-color-danger: 	$base-color-info;
+$base-color-link: 		$base-color-info;
+*/
+
+*
+{
+	outline: 0px none rgba(0,0,0,0) !important;
+}
+
+.transform-style
+{
+	@include backface-visibility(hidden);
+
+	.ui-app-csstransforms & 
+	{
+		@include transform-style(flat);
+	}
+	.ui-app-csstransforms3d &
+	{
+		@include transform-style(preserve-3d);
+	}
+}
+
+.left
+{
+	float: left;
+}
+.right
+{
+	float: right;
+}
+
+.float-none
+{
+	float: none;
+}
+
+.align-left
+{
+	text-align: left;
+}
+
+.align-center
+{
+	text-align: center;
+}
+
+.align-right
+{
+	text-align: right;
+}
+
+.ui-app-page
+{
+	min-width: 768px;
+}
+
+.no-margin
+{
+	margin: 0 !important;
+}
+
+.bold
+{
+	font-weight: bold;
+}
+.observation
+{
+	color: #999999;
+    font-size: 11px;
+    left: 5px;
+    position: relative;
+}
+.interval
+{
+	line-height: 30px;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.form-input-color
+{
+	color: #3b484f;
+}
+
+.nobr{ white-space:nowrap;}
+
+.ellipsis {
+	@include ellipsis;
+}
+
+.render-footer
+{
+	font-size: 10px;
+    left: 400px;
+    position: absolute;
+    top: 23px;
+    z-index: 0;
+}
+
+#iframe
+{
+	//background: image-url('ui/preload.gif') center center no-repeat;
+	background-size: 20px auto;
+}
+
+input[type="text"],
+input[type="password"],
+textarea
+{
+	@include box-shadow(0 2px 2px -2px rgba(0, 0, 0, 0) inset, 0px 0px 0px 0px $base-color-info);
+	@include box-sizing(border-box);
+	@include transition(all 300ms ease);
+	@include border-radius(0px);
+	background: #EFEFEF;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    border-width: 1px 0px 0px 0px;
+    @extend .form-input-color !optional;
+    font-size: 12px;
+    padding: 10px;
+    width: 100%;
+    cursor: auto !important;
+    height: 37px;
+    -webkit-appearance: none;
+
+    &:focus
+	{
+		@include box-shadow(0 2px 2px -2px rgba(0, 0, 0, 0) inset, 0px 0px 5px 0px $base-color-info);
+		@include transition(all 300ms ease);
+		border-color: $base-color-info;
+	}
+}
+textarea
+{
+	resize: none;
+	min-height: 110px;
+}
+
+input[type="text"]
+{
+	&.disabled, &.disabled *
+	{
+		background-color: #EEE;
+		color: #AAA;
+		cursor: not-allowed !important;
+	}
+}
+
+input[type="text"],
+input[type="password"],
+select,
+textarea
+{
+	@if $radius-active == true
+	{
+		@include border-radius(6px);
+	}
+}
+
+*:focus, *:active, 
+*::-moz-focus-inner
+{
+	outline: 0px none rgba(0,0,0,0) !important;
+}
+select
+{
+	@include box-sizing(border-box);
+	padding: 0 4px;
+    font-size: 1em;
+    @extend .form-input-color !optional;
+    @include appearance(none);
+    border: none;
+    height: 37px;
+
+    option
+    {
+    	font-size: 1em;
+    	@include box-sizing(border-box);
+    	padding-right: 20px;
+    }
+}
+
+.ui-app-message-intro
+{
+	@include transition(all 300ms ease 5000ms);
+	@include box-sizing(border-box);
+	padding: 0 10px;
+	margin-bottom: 8px;
+	background-color: $base-color-info;
+	color: #FFF;
+	line-height: 30px;
+	position: relative;
+	overflow: hidden;
+	height: 30px;
+
+	.icon-info
+	{
+		font-size: 26px;
+	    line-height: 8px;
+	    text-indent: -6px;
+	}
+
+	span
+	{
+		background-color: $base-color-info;
+	    float: right;
+	    font-size: 14px;
+	    height: 100%;
+	    line-height: 30px;
+	    padding: 0 20px;
+	    position: absolute;
+	    right: 0;
+	    top: 0;
+	    width: auto;
+	}
+
+	&.warning
+	{
+		background-color:  $base-color-warning;
+	}
+
+	&.hide
+	{
+		height: 0;
+		margin-bottom: 0;
+	}
+
+
+	&.full
+    {
+    	span{background-color:  $base-color-danger;}
+    }
+	&.half-full
+	{
+		span{background-color:  $base-color-warning;}
+	}
+	&.half-empty
+	{
+		span{background-color:  $base-color-success;}
+	}
+	&.empty
+	{
+		span{background-color:  $base-color-info;}
+	}
+}
+
+.ui-app-page-tools
+{
+	@include fixed($menu-size, $menu-size);
+	@include calc(width, "100% - #{$menu-size}");
+	@include box-sizing(border-box);
+	background-color: darken($base-color-blue-light, 3%); //lighten($base-color-blue-dark, 10%)
+	padding: 0px;
+	margin-bottom: 0;
+	text-align: center;
+	//height: $menu-size;
+	height: 48px;
+	z-index: 6;
+	min-width: 500px;
+
+
+	.ui-app-page-tabs
+	{
+		@include box-sizing(border-box);
+		background: transparent;
+		position: absolute;
+		//bottom: 14px;
+		//left: 15px;
+		bottom: 7px;
+    	right: 12px;
+    	float: right;
+
+
+    	.no-hotspot-filter &
+    	{
+    		display: none;
+    	}
+
+
+		.ui-list-hotspot-details
+		{
+			@include box-shadow(rgba(0,0,0,0.2) 0px 3px 5px 0px);
+			@include box-sizing(border-box);
+			@include absolute(100%, 0px);
+			padding: 8px 0 8px 0;
+			background-color: #FFF;
+			display: none;
+
+			ul
+			{
+				@include box-sizing(border-box);
+				background: transparent;
+				padding: 0;
+				display: block;
+				overflow-y: hidden;
+				position: relative;
+				@include column-count(4);
+					@include column-rule(1px, solid, red);
+					@include column-rule-width(0px);
+					@include column-gap(0px);
+
+					li, li a
+				{
+					@include box-sizing(border-box);
+					padding: 0;
+					text-align: left;
+				}
+				li
+				{
+					@include box-sizing(border-box);
+					margin: 0 8px 0 8px;
+					position: relative;
+					top: 1px;
+					
+					&:last-child
+					{
+						a
+						{
+							border-bottom: 1px solid rgba(0,0,0,0) !important;
+						}
+					}
+				}
+				a
+				{
+					@include box-sizing(border-box);
+					border-bottom: 1px solid rgba(0,0,0,0.1);
+					text-align: left;
+					font-size: 11px;
+					color: #333;
+					padding: 0 5px !important;
+					margin: 0;
+					width: 100%;
+					text-indent: 5px;
+					font-weight: 300;
+
+					&:hover
+					{
+						background-color: $base-color-info;
+						color: #FFF;
+						text-decoration: none;
+					}
+
+					&.selected
+					{
+						background-color: $base-color-primary;
+						color: #FFF;
+						text-decoration: none;
+					}
+				}
+			}
+		}
+
+
+		.ui-app-tab.ui-btn.ui-btn-info
+		{
+			@include box-sizing(border-box);
+			background-color: transparentize($base-color-info, 0.7);
+			border-color: transparentize($base-color-info, 0.9);
+			float: right;
+			margin: 0 0 0 8px;
+		}
+
+		
+
+		a.ui-app-tab, label div.ui-app-tab
+		{
+			@include box-sizing(border-box);
+			line-height: 30px;
+			width: 200px;
+			float: left;
+			background: transparent;
+			margin: 0 0 0 0 !important;
+			border: 1px solid #FFF;
+			color: #FFF;
+			font-size: 12px;
+			font-weight: 400;
+		}
+
+		label
+		{
+			@include box-sizing(border-box);
+			cursor: pointer !important;
+			border: 1px solid #FFF;
+			line-height: 30px;
+			color: #FFF;
+			padding: 0 0 0 8px;
+			font-size: 11px;
+			min-width: 255px;
+			margin-right: 8px !important;
+
+			i:before
+			{
+				font-size: 14px;
+			    height: 0;
+			    line-height: 0 !important;
+			    padding: 0;
+			    position: relative;
+			    top: -1px;
+			    width: 0;
+			    margin-left: 5px;
+			}
+
+			&.actived
+			{
+				background: #FFF;
+				color: darken($base-color-blue-extra-light, 50%);
+			}
+
+			div.ui-app-tab
+			{
+				@include box-sizing(border-box);
+				width: auto;
+				padding-left: 10px;
+				cursor: pointer !important;
+			}
+		}
+
+
+		.actived
+		{
+			.ui-app-tab.ui-btn.ui-btn-info
+			{
+				@extend .ui-btn.ui-btn-info;
+
+				&:focus, &:active, &:hover
+				{
+					//background-color: red !important;
+				}
+			}
+		}
+
+		a.ui-app-tab
+		{
+			@include box-sizing(border-box);
+			height: 34px;
+			margin: 0 10px;
+
+			&.actived
+			{
+				@extend .ui-btn.ui-btn-info;
+				color: #FFF !important;
+			}
+
+			&.actived, &:hover
+			{
+				background: #FFF;
+				color: darken($base-color-blue-extra-light, 50%);
+				border: 1px solid #FFF;
+			}
+		}
+	}
+
+
+	.ui-app-actions-page
+	{
+		@include box-sizing(border-box);
+		margin: 8px 15px 8px 8px;
+		display: inline-table;
+		float: left;
+
+		.ui-btn
+		{
+			@include box-sizing(border-box);
+			//@include size(50px);
+			font-size: 12px;
+		    height: 32px;
+		    line-height: 30px;
+		    padding: 0 10px;
+		    width: auto;
+		}
+	}
+}

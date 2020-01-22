@@ -1,0 +1,119 @@
+/* ---------------------------------------------------------------------------------------------
+	- FONTS
+---------------------------------------------------------------------------------------------*/
+//@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+//@import url(http://fonts.googleapis.com/css?family=Patrick+Hand);
+
+/*@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Open Sans Light'), 
+  local('OpenSans-Light'), 
+  url(../fonts/OpenSans-Light.woff) format('woff');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), 
+  local('OpenSans'), 
+  url(../fonts/OpenSans.woff) format('woff');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Open Sans Semibold'), 
+  local('OpenSans-Semibold'), 
+  url(../fonts/OpenSans-Semibold.woff) format('woff');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Open Sans Bold'), 
+  local('OpenSans-Bold'), 
+  url(../fonts/OpenSans-Bold.woff) format('woff');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 800;
+  src: local('Open Sans Extrabold'), 
+  local('OpenSans-Extrabold'), 
+  url(../fonts/OpenSans-Extrabold.woff) format('woff');
+}
+@font-face {
+  font-family: 'Patrick Hand';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Patrick Hand'), 
+  local('PatrickHand-Regular'), 
+  url(../fonts/patrickhandregular.woff) format('woff');
+}*/
+
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Glyphicons Halflings'), 
+  local('Glyphicons Halflings'), 
+  url('../fonts/glyphicons-halflings-regular.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'GoodDog';
+    src: url('../fonts/gooddog-webfont.eot');
+    src: url('../fonts/gooddog-webfont.eot?#iefix') format('embedded-opentype'), 
+        url('../fonts/gooddog-webfont.woff') format('woff'), 
+        url('../fonts/gooddog-webfont.ttf') format('truetype'), 
+        url('../fonts/gooddog-webfont.svg#GoodDog') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'LigatureSymbols';
+    src: url('../fonts/ligaturesymbols-2.eot');
+    src: url('../fonts/ligaturesymbols-2.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ligaturesymbols-2.woff') format('woff'),
+         url('../fonts/ligaturesymbols-2.ttf') format('truetype'),
+         url('../fonts/ligaturesymbols-2.svg#LigatureSymbols') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 100;
+  src: local('Roboto Thin'), local('Roboto-Thin'), url('../fonts/roboto_100.woff') format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Roboto Light'), local('Roboto-Light'), url('../fonts/roboto_300.woff') format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto Regular'), local('Roboto-Regular'), url('../fonts/roboto_400.woff') format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Roboto Bold'), local('Roboto-Bold'), url('../fonts/roboto_700.woff') format('woff');
+}
+
+body
+{ 
+  font-family: 'Roboto', tahoma, sans-serif !important;
+  font-weight: 300; 
+  font-size: 100%;
+}
