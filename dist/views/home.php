@@ -7,10 +7,9 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<title>É Apenas Um Teste</title>
-		<link rel="stylesheet" href="{BASE_URL}assets/css/chat.css" type="text/css">
+		<link rel="stylesheet" href="assets/css/astedroid.css">
 	</head>
 	<body class="ui-page ui-page-{PAGE_CLASS}" {if {PAGE_CLASS} == 'home'}onmousedown="return false;"{/if}>
-		<link rel="stylesheet" href="assets/css/astedroid.css">
 		<div class="py" data-py="{RAND}"></div>
 		<script id="game-tmpl" type="text/html">
 			<div id="init" class="ui-layer">
@@ -59,19 +58,8 @@
 		<script type="text/javascript">
 			var base_url = baseurl = BASE_URL = BASEURL = '/';
 		</script>
-		<script type="text/javascript" src="assets/js/lib/jquery.min.js"></script>
-		<script type="text/javascript" src="assets/js/lib/jquery.transit-0.9.9.min.js"></script>
-		<script type="text/javascript" src="assets/js/lib/soundjs.min.js"></script>
-		<script type="text/javascript" src="assets/js/lib/stats.min.js"></script>
-		<script type="text/javascript" src="assets/js/lib/Vector2.js"></script>
-		<script type="text/javascript" src="assets/js/lib/pointer.min.js"></script>
-		<script type="text/javascript" src="assets/js/lib/modernizr-2.7.1-min.js"></script>
-		<script type="text/javascript" src="assets/js/game/score.js"></script>
-		<script type="text/javascript" src="assets/js/game/spaceship.js"></script>
-		<script type="text/javascript" src="assets/js/game/asteroid.js"></script>
-		<script type="text/javascript" src="assets/js/game/bullet.js"></script>
-		<script type="text/javascript" src="assets/js/game/starfield.js"></script>
-		<script type="text/javascript" src="assets/js/game/gameteste.js"></script>
-		<script type="text/javascript" src="assets/js/main.js"></script>
+		<script type="text/javascript" src="assets/js/vendors.min.js"></script>
+		<script type="text/javascript" src="assets/js/scripts.min.js"></script>
+		
 	</body>
 </html>
