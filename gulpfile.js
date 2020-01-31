@@ -17,6 +17,11 @@ var serverStarted = false;
 var fs = require('fs');
 var package = JSON.parse(fs.readFileSync('./package.json'));
 var babel = require('gulp-babel');
+var ts = require('gulp-typescript');
+var sourcemaps = require('gulp-sourcemaps');
+var tsProject = ts.createProject('tsconfig.json');
+var reporter = ts.reporter.fullReporter();
+var merge = require('merge-stream');
 var paths = {
     styles: {
         src: ['./src/sass/**/*.scss', './src/sass/*.scss'],
@@ -25,9 +30,16 @@ var paths = {
     scripts: {
         src: [
             './src/js/game/*.js',
-            './src/js/main.js'
+            './src/js/App.js'
         ],
         dest: './dist/assets/js/'
+    },
+    typescript: {
+        src: [
+            './src/ts/**/*.ts',
+            './src/ts/App.ts'
+        ],
+        dest: './src/js/'
     },
     vendors: {
         src: [
@@ -52,8 +64,8 @@ function complete(){
 };
 
 function clean() {
-    //return del([ 'dist' ]);
-    return;
+    return del([ 'src/js' ]);
+    //return;
 }
 
 function styles() {
@@ -73,14 +85,27 @@ function styles() {
 function scripts() {
     return gulp.src(paths.scripts.src, { sourcemaps: true })
         .pipe(concat('scripts.min.js'))
-        .pipe(babel({
+        /* .pipe(babel({
             presets: ['@babel/env']
-        }))
+        })) */
         .pipe(uglify())
         .pipe(gulp.dest(paths.scripts.dest))
         .on('end', function(){
             complete();
         });
+}
+
+function typescript() {
+    if(!tsProject){
+        tsProject = ts.createProject('tsconfig.json');
+    }
+
+    return gulp.src(paths.typescript.src)
+        .pipe(sourcemaps.init())
+        .pipe(tsProject())
+        .pipe(babel())
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest(paths.typescript.dest));
 }
 
 
@@ -92,17 +117,18 @@ function vendors() {
 
 
 function watch() {
-    gulp.watch([].concat(paths.scripts.src), gulp.parallel(scripts));
+    gulp.watch([].concat(paths.typescript.src), gulp.series(clean, typescript, scripts));
     gulp.watch(paths.styles.src, styles);
 }
 
 
-var build = gulp.series(clean, gulp.parallel(styles, scripts, vendors));
+var build = gulp.series(clean, gulp.parallel(styles, typescript, scripts, vendors));
 
 
 
 exports.clean = clean;
 exports.styles = styles;
+exports.typescript = typescript;
 exports.scripts = scripts;
 exports.vendors = vendors;
 exports.watch = watch;

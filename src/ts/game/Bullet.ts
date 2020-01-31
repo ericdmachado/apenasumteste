@@ -1,4 +1,4 @@
-class Bullet{
+export default class Bullet{
 
 	private width:number;
 	private height:number;

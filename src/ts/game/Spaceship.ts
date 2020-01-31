@@ -1,18 +1,24 @@
-class SpaceShip{
-	private pos:Vector;
+export default class SpaceShip{
+	private pos:any;
 	private angle:number;
-	private vel:Vector;
-	private targetVel:Vector;  
-	private temp:Vector;
+	private vel:any;
+	private targetVel:any;  
+	private temp:any;
 	private main:any;
 	private counter:number;
-	private shiphalf:Object;
-	private half:Object;
+	private shiphalf:any;
+	private half:any;
 	private canvas:HTMLCanvasElement;
 	private context:CanvasRenderingContext2D;
-	private bullets:Array;
+	private bullets:any;
+	private state:any;
 
 	constructor(){
+		this.angle = 0;
+		this.counter = 0;
+		this.shiphalf = 0;
+		this.canvas = <HTMLCanvasElement>document.createElement('canvas');
+		this.context = <CanvasRenderingContext2D>this.canvas.getContext('2d');
 		/* this.pos = new Vector2(0,0);
 		this.angle = 0;
 		this.vel = new Vector2(0,0);
@@ -21,8 +27,6 @@ class SpaceShip{
 		this.main;
 		this.bullets = [];
 		this.counter = 0;
-		this.canvas = <HTMLCanvasElement>document.createElement('canvas');
-		this.context = <CanvasRenderingContext2D>canvas.getContext('2d');
 		this.canvas.width = 40;
 		this.canvas.height = 40;
 		this.canvas.id="spaceship"; */
@@ -36,8 +40,11 @@ class SpaceShip{
 			width: (document.documentElement.clientWidth/2) - shiphalf.width,
 			height: (document.documentElement.clientHeight/2) - shiphalf.height
 		}; */
-	}
 
+		this.state = {
+			players: []
+		}
+	}
 	
 	loadSpaceship(){
 		/* var t = this;
@@ -55,7 +62,31 @@ class SpaceShip{
           	imageObj.src = 'assets/img/gameui/spaceship.png'; */
 	};
 
-	move(x:number, y:number){
+	move( command:any ){
+		console.info(`Moving ${command.playerId} with command ${command.keyPressed}`);
+
+		const acceptedMoves = {
+			ArrowUp(player){
+				console.info('Moving player Up');
+			},
+			ArrowDown(player){
+				console.info('Moving player ArrowDown');
+			},
+			ArrowLeft(player){
+				console.info('Moving player Left');
+			},
+			ArrowRight(player){
+				console.info('Moving player Right');
+			}
+		};
+
+		const keyPressed = command.keyPressed;
+		const player = this.state.players[command.playerId];
+
+
+		console.info( keyPressed, player, acceptedMoves );
+
+
 		/* canvas.setAttribute('class', 'actived');
 
 		if(canvas.getAttribute('data-status') == 'actived')
@@ -139,7 +170,7 @@ class SpaceShip{
 	        canvas.style.width = oldWidth + 'px';
 	        canvas.style.height = oldHeight + 'px';
 
-	        context.scale(ratio, ratio); */
-	    }
-	};
+	        context.scale(ratio, ratio);
+	    } */
+	}
 }

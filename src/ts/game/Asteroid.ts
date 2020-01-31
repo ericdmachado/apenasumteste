@@ -1,4 +1,4 @@
-class Asteroid{
+export default class Asteroid{
 
 	private sprite;
 	private active;
@@ -11,7 +11,7 @@ class Asteroid{
 	private main;
 
 	constructor(m,x,y){
-		this./* sprite = m.spriteAsteroid;	
+		/*this.sprite = m.spriteAsteroid;	
 		this.active = true;
 		this.x 	= x;
 		this.y 	= y;

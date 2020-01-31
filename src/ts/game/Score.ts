@@ -1,16 +1,25 @@
-class Score {
-	points = this.points = 0; 
-	score  = this.score = 0;
+export default class Score {
+	private _points:number;
+	private _score:number;
 
-	time = this.time = 0;
-	fntime = this.fntime = 0;
+	private time:number;
+	private fntime:number;
 
-	lim = this.lim = [];
-	n = this.n = 1;
+	private lim:any;
+	private n:number;;
 
-	this.getRandomPoints = function(point)
-	{
-		var t = this;
+	constructor(){
+		this._score = 0;
+		this._points = 0;
+		this.time = 0;
+		this.fntime = 0;
+		this.lim = [];
+		this.n = 1;
+	}
+
+	//get randomPoints( point:number )
+	//{
+		/* var t = this;
 		//points += Math.round(Math.random() * 10);
 		points += point;
 		lim.push(1);
@@ -28,12 +37,11 @@ class Score {
 			t.setPoints();	
 		}, 600);
 
-		return points;
-	}
+		return points; */
+	//}
 
-	this.setPoints = function()
-	{
-		$('#game-score span.add').addClass('more');
+	setPoints(){
+		/* $('#game-score span.add').addClass('more');
 
 		clearTimeout(time);
 		time = setTimeout(function(){
@@ -51,18 +59,19 @@ class Score {
 			}
 
 			//console.log(score / 10 , );
-		}, 100);
+		}, 100); */
 	}
 
 
-	get points(){
-		if(!$('#game-score span.add').length) $('#game-score').append('<span class="add"></span>');
+	points(){
+		/* if(!$('#game-score span.add').length) $('#game-score').append('<span class="add"></span>');
 		$('#game-score span.add').removeClass('more');
 
-		score = this.score = this.score + this.getRandomPoints(Math.round(point));
+		score = this.score = this.score + this.getRandomPoints(Math.round(point)); */
 	}
 
 	get score(){
-		return parseInt($('#game-score span.score').text());
+		//return parseInt($('#game-score span.score').text());
+		return 0;
 	}
 }

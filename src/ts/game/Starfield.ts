@@ -1,4 +1,4 @@
-class Starfield{
+export default class Starfield{
 	/* var spriteStars = ['assets/img/gameui/bkg-stars-max.png', 'assets/img/gameui/bkg-stars-mid.png', 'assets/img/gameui/bkg-stars-min.png'];
 	var starMinCanvas = this.starMinCanvas = document.createElement('canvas');
 	var starMaxCanvas = this.starMaxCanvas = document.createElement('canvas');
