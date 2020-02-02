@@ -1,27 +1,19 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var browserSync  = require('browser-sync').create();
-var rename = require('gulp-rename');
 var sass = require('gulp-sass');
-var copy = require('gulp-copy');
-var nodemon = require('nodemon');
-var eventStream = require('event-stream');
 var autoprefixer = require('gulp-autoprefixer');
 var path = require('path');
-var gulpsync = require('gulp-sync')(gulp);
 var uglify = require('gulp-uglify-es').default;
 var cssmin = require('gulp-cssmin');
 var notify = require('node-notifier');
 var del  = require('del');
-var serverStarted = false;
 var fs = require('fs');
 var package = JSON.parse(fs.readFileSync('./package.json'));
 var babel = require('gulp-babel');
 var ts = require('gulp-typescript');
 var sourcemaps = require('gulp-sourcemaps');
 var tsProject = ts.createProject('tsconfig.json');
-var reporter = ts.reporter.fullReporter();
-var merge = require('merge-stream');
 var paths = {
     styles: {
         src: ['./src/sass/**/*.scss', './src/sass/*.scss'],
@@ -52,7 +44,7 @@ var paths = {
 sass.compiler = require('node-sass');
 
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-    - COMPLETE
+- COMPLETE
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
 function complete(){
     notify.notify({
@@ -70,44 +62,43 @@ function clean() {
 
 function styles() {
     return gulp.src(paths.styles.src)
-        .pipe(sass().on('error', function(error){
-            console.info( error );
-        }))
-        .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 7', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-        .pipe(cssmin())
-        .pipe(gulp.dest(paths.styles.dest))
-        .on('end', function(){
-            complete();
-        });
+    .pipe(sass().on('error', function(error){
+        console.info( error );
+    }))
+    .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 7', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
+    .pipe(cssmin())
+    .pipe(gulp.dest(paths.styles.dest))
+    .on('end', function(){
+        complete();
+    });
 }
-
 
 function scripts() {
     return gulp.src(paths.scripts.src, { sourcemaps: true })
-        .pipe(concat('scripts.min.js'))
-        /* .pipe(babel({
-            presets: ['@babel/env']
-        })) */
-        .pipe(uglify())
-        .pipe(gulp.dest(paths.scripts.dest))
-        .on('end', function(){
-            complete();
-        });
+    //.pipe(concat('scripts.min.js'))
+    //.pipe(uglify())
+    .pipe(gulp.dest(paths.scripts.dest))
+    .on('end', function(){
+        complete();
+    });
 }
 
 function typescript() {
     if(!tsProject){
         tsProject = ts.createProject('tsconfig.json');
     }
-
+    
     return gulp.src(paths.typescript.src)
         .pipe(sourcemaps.init())
         .pipe(tsProject())
         .pipe(babel())
+        .pipe(uglify())
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(paths.typescript.dest));
+        .pipe(gulp.dest(paths.scripts.dest))
+        .on('end', function(){
+            complete();
+        });
 }
-
 
 function vendors() {
     return gulp.src(paths.vendors.src, { sourcemaps: true })
@@ -117,12 +108,12 @@ function vendors() {
 
 
 function watch() {
-    gulp.watch([].concat(paths.typescript.src), gulp.series(clean, typescript, scripts));
+    gulp.watch([].concat(paths.typescript.src), gulp.series(clean, typescript));
     gulp.watch(paths.styles.src, styles);
 }
 
 
-var build = gulp.series(clean, gulp.parallel(styles, typescript, scripts, vendors));
+var build = gulp.series(clean, gulp.parallel(styles, typescript, vendors));
 
 
 
@@ -135,6 +126,6 @@ exports.watch = watch;
 exports.build = build;
 
 /*
- * Define default task that can be called by just running `gulp` from cli
- */
+* Define default task that can be called by just running `gulp` from cli
+*/
 exports.default = build;

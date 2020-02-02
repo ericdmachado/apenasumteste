@@ -84,7 +84,7 @@ export default class SpaceShip{
 		const player = this.state.players[command.playerId];
 
 
-		console.info( keyPressed, player, acceptedMoves );
+		console.info( keyPressed, player );
 
 
 		/* canvas.setAttribute('class', 'actived');

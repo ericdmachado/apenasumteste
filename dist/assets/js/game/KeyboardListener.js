@@ -1,0 +1,2 @@
+"use strict";System.register([],(function(e,s){s&&s.id;return{setters:[],execute:function(){e("default",class{constructor(){this.state={observers:[]},document.addEventListener("keydown",this.handleKeydown.bind(this))}subscribe(e){this.state.observers.push(e)}handleKeydown(e){const s={playerId:"player1",keyPressed:e.key};this.notifyAll(s)}notifyAll(e){console.log(`Notifying ${this.state.observers.length} observers`);for(const s of this.state.observers)s(e)}})}}}));
+//# sourceMappingURL=KeyboardListener.js.map

@@ -1,0 +1,2 @@
+"use strict";System.register([],(function(e,t){t&&t.id;return{setters:[],execute:function(){e("default",class{constructor(){this.angle=0,this.counter=0,this.shiphalf=0,this.canvas=document.createElement("canvas"),this.context=this.canvas.getContext("2d"),this.state={players:[]}}loadSpaceship(){}move(e){console.info(`Moving ${e.playerId} with command ${e.keyPressed}`);const t=e.keyPressed,s=this.state.players[e.playerId];console.info(t,s)}draw(){}update(){}fire(){}setPixelRatio(){}})}}}));
+//# sourceMappingURL=Spaceship.js.map

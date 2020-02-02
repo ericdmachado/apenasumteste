@@ -1,24 +1,18 @@
-export default class KeyboardListener{
-
-    private keycodes:Object;
+export default class KeyboardListener
+{
     private state:any;
 
     constructor(){
-        this.keycodes = {32:'Space', 87: 'Up', 83: 'Down'};
-        this.state = {
-            observers: []
-        }
-
-        document.addEventListener('keydown', this.handleKeydown);
+        this.state = { observers: [] }
+        document.addEventListener('keydown', this.handleKeydown.bind(this));
     }
 
     subscribe( observerFunction:Function ){
-        this.state.observers( observerFunction );
+        this.state.observers.push( observerFunction );
     }
 
-    handleKeydown( event:KeyboardEvent ){
+    private handleKeydown( event:KeyboardEvent ){
         const keyPressed = event.key;
-        
         const command = {
             playerId: 'player1',
             keyPressed
@@ -27,7 +21,7 @@ export default class KeyboardListener{
         this.notifyAll( command );
     }
 
-    notifyAll( command:Object ){
+    private notifyAll( command:Object ){
         console.log(`Notifying ${this.state.observers.length} observers`);
 
         for(const observerFunction of this.state.observers){

@@ -6,6 +6,7 @@ export default class Bullet{
 	private x:number;
 	private y:number;
 	private main:HTMLCanvasElement;
+
 	
 	constructor( m, x, y ){
 		this.width 	= 10;

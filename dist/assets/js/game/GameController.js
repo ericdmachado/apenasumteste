@@ -1,0 +1,2 @@
+"use strict";System.register(["./Spaceship","./Score","./Starfield","./KeyboardListener"],(function(e,t){var n,u,c,i;t&&t.id;return{setters:[function(e){n=e},function(e){u=e},function(e){c=e},function(e){i=e}],execute:function(){e("default",class{constructor(){let e=new n.default;new u.default,new c.default;(new i.default).subscribe(e.move.bind(e))}load(){console.info("LOAD")}})}}}));
+//# sourceMappingURL=GameController.js.map

@@ -13,8 +13,7 @@ export default class GameController{
         let starfield = new Starfield();
         let keyboardListener = new KeyboardListener();
 
-
-        keyboardListener.subscribe(spaceship.move);
+        keyboardListener.subscribe(spaceship.move.bind(spaceship));
     }
 
     load(){
